@@ -17,6 +17,11 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password',
     ];
+    
+    public function microposts()
+    {
+        return $this->hasMany(Micropost::class);
+    }
 
     /**
      * The attributes that should be hidden for arrays.
@@ -26,4 +31,6 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    
+
 }
