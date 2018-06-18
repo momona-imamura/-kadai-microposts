@@ -10,10 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+///});
 Route::get('/', 'MicropostsController@index');;
+Route::get('/home', 'MicropostsController@index');;
 
 
 Route::get('signup', 'Auth\RegisterController@showRegistrationForm')->name('signup.get');
@@ -29,6 +30,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::delete('unfollow', 'UserFollowController@destroy')->name('user.unfollow');
         Route::get('followings', 'UsersController@followings')->name('users.followings');
         Route::get('followers', 'UsersController@followers')->name('users.followers');
+        Route::post('favorite','MicropostsFavoriteController@store')->name('users.favorite');
+        Route::delete('unfavorite','MicropostsFavoriteController@destroy')->name('users.unfavorite');
+        Route::get('favorites','UsersController@favorites')->name('users.favorites');
     });
     Route::resource('microposts', 'MicropostsController', ['only' => ['store', 'destroy']]);
 });
